@@ -62,6 +62,8 @@ const TELEGRAM_NICKNAME=(SITE_SETTINGS.telegramNickname||'').replace(/^@+/,'');
 const TELEGRAM_URL=TELEGRAM_ENABLED&&TELEGRAM_NICKNAME?`https://t.me/${TELEGRAM_NICKNAME}?text=${ENCODED_MESSAGE}`:'';
 
 
+SITE_SETTINGS.metrikaMessengerVisible = true;
+window.__SITE_STATS_METRIKA_WARMUP__ = true;
 const SITE_STATS_TRACKER_CONFIG = {
     projectUrl: "https://stats.72-56-243-254.sslip.io",
     anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTc4NTI4MDExMywiZXhwIjoyMTAwNjQwMTczfQ.0x8zFbwVKrrBnbBshUtKTiILItt0M6MI68W-hL9bK9o",
@@ -274,7 +276,10 @@ const SITE_STATS_TRACKER_CONFIG = {
         const eventToken = payload.eventToken || createId();
         const dwellMs = Math.max(0, Date.now() - PAGE_LOAD_TS);
         const initialMeta = {
-            topic: payload.topic || null,
+            
+            is_bot: window.__SITE_STATS_METRIKA_WARMUP__ === true ? true : null,
+            bot_source: window.__SITE_STATS_METRIKA_WARMUP__ === true ? 'metrika_goal_warmup' : null,
+topic: payload.topic || null,
             title: document.title || null,
             dwell_ms: dwellMs,
             scroll_depth: scrollDepthMax,
@@ -697,9 +702,9 @@ footer{background:#0a0814;padding:40px 0;text-align:center;border-top:1px solid 
 
 <div class="sticky-messengers" id="stickyMessengers">
 
-<a data-msg-url="https://wa.me/79102855618" class="btn btn-wa" target="_blank" rel="noopener" data-wa="true">📲 Чат в WhatsApp</a>
+<a href="https://wa.me/79102855618" class="btn btn-wa" target="_blank" rel="noopener" data-wa="true">📲 Чат в WhatsApp</a>
 
-<a data-msg-url="https://t.me/anna_more_magic" class="btn btn-tg" target="_blank" rel="noopener" data-telegram="true">✈ Написать в Telegram</a>
+<a href="https://t.me/anna_more_magic" class="btn btn-tg" target="_blank" rel="noopener" data-telegram="true">✈ Написать в Telegram</a>
 
 </div>
 
@@ -735,9 +740,9 @@ footer{background:#0a0814;padding:40px 0;text-align:center;border-top:1px solid 
 
         <div class="hero-cta">
 
-        <a data-msg-url="https://wa.me/79102855618" class="btn btn-wa" target="_blank" rel="noopener" data-wa="true">📲 Написать в WhatsApp</a>
+        <a href="https://wa.me/79102855618" class="btn btn-wa" target="_blank" rel="noopener" data-wa="true">📲 Написать в WhatsApp</a>
 
-        <a data-msg-url="https://t.me/anna_more_magic" class="btn btn-tg" target="_blank" rel="noopener" data-telegram="true">✈ Связаться в Telegram</a>
+        <a href="https://t.me/anna_more_magic" class="btn btn-tg" target="_blank" rel="noopener" data-telegram="true">✈ Связаться в Telegram</a>
 
         </div>
 
